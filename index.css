@@ -1,0 +1,293 @@
+.filter-container h2.filter-title {
+    color: #1f1e1e;
+    font-weight: 900;
+    font-size: 23px;
+    font-family: Museo-Sans;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 5px;
+}
+
+.filter-container .inner .stage-select {
+  padding: 7px 0px;
+  border-bottom:1px solid #ccc;
+}
+.filter-container .inner .stage-select.last {
+  border-bottom:none;
+}
+
+
+  .tag-container {
+    background-color:#fff;
+    border-radius:.25rem;
+  }
+
+.shadow {
+  box-shadow: 0 .7rem 1.5rem rgba(0,0,0,.08) !important;
+}
+
+.shadow-sm {
+  box-shadow: 3px 4px 9px -2px rgba(0,0,0,.04) !important;
+}
+
+.mdx-full-row.agenda-new-module .container {
+  max-width:1140px; /*980*/
+}
+
+.agenda-new-module .btn-group label {
+     border-radius: 0 20px 0 0!important;
+    margin-left:-20px!important;
+}
+.agenda-new-module .btn-group label:first-of-type {
+  margin-left:0px!important;
+}
+
+.agenda-new-module .btn-group label {
+  box-shadow:none!important;
+}
+
+.agenda-new-module .custom-control-label {
+  margin: 2px 0 0 0;
+  color: #3d3d3d;
+}
+
+.agenda-new-module .custom-checkbox input,
+.agenda-new-module .custom-checkbox label{
+  cursor:pointer;
+}
+
+.agenda-new-module .form-check {
+  padding-left:0;
+}
+
+.agenda-new-module .custom-control-label::before {
+  background: none;
+  border: 1px solid #000;
+} 
+
+.stages .custom-control label {
+ text-transform: none!important;
+ display: inline; 
+}
+
+.agenda-stage-label {
+  font-size: 0.7rem;
+  text-decoration:none;
+}
+
+@media (max-width:767px) {
+  .stages .custom-control {
+    margin-left:1rem;
+  }
+  .stages .custom-control:first-of-type {
+    margin-left:0rem;
+  }
+}
+
+.agenda-new-module .btn-group label:nth-of-type(1) { z-index:5 }
+.agenda-new-module .btn-group label:nth-of-type(2) { z-index:4 }
+.agenda-new-module .btn-group label:nth-of-type(3) { z-index:3 }
+.agenda-new-module .btn-group label:nth-of-type(4) { z-index:2 }
+.agenda-new-module .btn-group label:nth-of-type(5) { z-index:1 }
+
+.agenda-new-module .card {
+  border: none;
+  border-radius:0;
+  cursor:pointer;
+  transition: background 0.3s;
+  display: block;
+  transition: 0.2s ease;
+  /* border:1px solid transparent; */
+}
+
+.agenda-new-module .show-more.rotated {
+  transform: rotate(90deg);
+}
+
+.description-long { 
+  display:none;
+}
+
+.agenda-new-module .card-border {
+  border-top:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+}
+
+.agenda-new-module .card-border {
+    position: absolute;
+    float: left;
+    width: 3px;
+    transition: width 0.2s;
+}
+
+@media (min-width: 768px){
+.agenda-new-module .card-border.card-selected {
+ width:5px;
+}
+}
+
+.card:hover {
+ 
+}
+.card-with-info {
+  transition: 0.2s ease;
+}
+@media (min-width: 768px){
+  .card-with-info:hover {
+    transform:translateX(5px);
+    background: #f5f5f5; 
+  }
+}
+
+.card.selected {
+  background: #f5f5f5;
+  /* border:1px solid #ccc; */
+}
+
+.show-more {
+  transition: all 0.2s;
+}
+
+.speaker-deets .speaker-title {
+ font-weight:bold;
+}
+
+.speaker-deets:hover .speaker-title {
+ /* font-weight:bold; */
+}
+
+.card a {
+  text-decoration: none!important;
+}
+
+#daySelect label:hover {
+  background:#9b9b9b;
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:#fff; /* change if the mask should have another color then white */
+  z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+  width:200px;
+  height:200px;
+  position:absolute;
+  left:50%; /* centers the loading animation horizontally one the screen */
+  top:50%; /* centers the loading animation vertically one the screen */
+  background-image:url(https://cdn2.hubspot.net/hubfs/3873528/CORE-Maddox/images/spinner-1.gif); /* path to your loading animation */
+  background-repeat:no-repeat;
+  background-position:center;
+  margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+.input-group {
+  flex-wrap: nowrap;
+}
+
+.input-group .form-control {
+  background-color: #F2F6FA;
+  border-color: #AFAFAF;
+  border-radius:3px!important;
+}
+
+
+.modal-header {
+  border:0!important;
+}
+
+.modal-content {
+  border-radius:0!important;
+}
+
+.session-icon-col {
+  max-width:220px!important;
+}
+
+*:focus {
+ outline: #999 auto 5px!important; 
+}
+
+/* Modal jump fix */
+.modal-open {
+  /* padding-right: 0px!important; */
+  overflow:hidden!important;
+}
+
+/* AGGRESSIVE FIX FOR LI SIZE 
+.card ul li {
+  font-size:14px;
+}
+
+@media (max-width: 767px) {
+ .card ul li {
+    font-size:16px;
+  }
+}
+*/
+
+.description-long-intro p {
+  font-size:14px!important;
+}
+.description-long p {
+  font-size:14px!important;
+}
+.description-long li {
+  font-size:14px!important;
+}
+@media (min-width:768px) {
+  .arrow-button--border.arrow-button--arrow.show-more {
+    right:5px!important;
+  }
+}
+.arrow-button--border.arrow-button--arrow.show-more {
+  border:1px solid;
+  position:absolute;
+  width:24px;
+  height:24px;
+  margin:auto;
+  border-radius:50px;
+  right:5px;
+  top:5px;
+}
+
+.card--container:hover .arrow-button--border.arrow-button--arrow.show-more {
+  /*transform:translateX(35px);*/
+  transform:rotate(90deg);
+}
+
+.card--container .label-title {
+    margin-bottom: 0px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 900;
+  font-family: museo-sans,sans-serif;
+}
+
+.card--container .session-title-spacing-above {
+  height:12px;
+  border-bottom: 3px solid;
+}
+@media (min-width: 768px){
+  .card--container .session-title-spacing-above {
+    height:50px;
+  }
+}
+
+.speaker-deets img {
+  border-radius:100px;
+  filter:grayscale(1);
+  transition: filter 0.2s;
+}
+.card:hover .speaker-deets img {
+  filter:grayscale(0)
+}
+
+.card.active-card .speaker-deets img {
+  filter:grayscale(0);
+}

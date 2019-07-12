@@ -1,0 +1,1033 @@
+<style>
+  {#
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color:{{ module.default_career_level_color.color }}!important;
+  }
+  #}
+  
+@media(min-width:576px){
+  #agenda-container-css .container {
+    max-width:540px;
+  }
+}
+@media (min-width: 768px) {
+  #agenda-container-css .container {
+      max-width: 100%;
+  }
+}
+@media(min-width:992px){
+  #agenda-container-css .container {
+    max-width:960px;
+  }
+}
+@media(min-width:1200px){
+  #agenda-container-css .container {
+    {% if !module.hide_stages %}max-width:1240px;{% elif {% else %}max-width:1140px;{% endif %}
+  }
+}
+
+.filter-container {
+  border:1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
+  border-left:3px solid {{ module.default_career_level_color.color }}!important;
+}
+
+*:focus{
+    outline: none!important;
+}
+
+body {
+  background-color:{{module.bg_color.color}}!important;
+}
+
+  /* CLASSES TO HIGHLIGHT CARDS WITHOUT TRACKS */
+  /* this CSS needs to have HUBL inputs available */
+  .highlighted--crosstrack {
+    background-color: {{module.all_track_background.color}}!important;
+  }
+  /*
+  .highlighted--crosstrack-border {
+  {# background-color:{{module.all_track_highlight.color}}!important; #}
+  }
+  */
+
+  .header-background-container--inner {
+    transform: translateY(30px);
+  }
+
+  .stages-check {
+    padding: 13px;
+    min-width: 200px;
+    /* border: 1px solid !important; */
+    border-radius:5px;
+    color: {{module.primary_color.color}};
+    min-width:175px;
+    font-size:0.9rem;
+    font-weight:bold;
+    text-transform:uppercase;
+    transition:0.2s ease;
+    cursor:pointer;
+  }
+  .stages-check:hover {
+    background-color: {{module.primary_color.color}}!important;
+    color:#fff;
+  }
+  @media(max-width:480px){
+    .stages-check {
+      width:100%;
+    }
+  }
+
+  .strip-levels {
+    background-color: #fff;
+  }
+
+  {% if !module.category_page %}
+  .strip-tags button.tag-button {
+    padding: 8px 6px;
+    /* text-transform:uppercase; */
+    border: 1px solid {{module.primary_color.color}};
+    background-color: transparent;
+    border-radius:5px;
+    color: {{module.primary_color.color}};
+    font-size:0.9rem;
+    outline: 0px!important;
+    transition:0.2s ease;
+    cursor:pointer;
+    font-size:12px;
+  }
+
+  @media (min-width: 768px){
+   .strip-tags button.tag-button {
+     font-size:12px;
+    }
+    .strip-tags button.tag-button:hover {
+      background-color: {{module.primary_color.color}}!important;
+      color: #fff;
+    }
+  }
+  
+  .tag-checked {
+    background-color: {{module.primary_color.color}}!important;
+    color: #fff!important;
+    outline:0px!important;
+  }
+  
+  {% else %}
+  
+  .strip-tags button.tag-button {
+    padding: 8px 6px;
+    /* text-transform:uppercase; */
+    border: 2px solid {{module.category_button.color}};
+    background-color: transparent;
+    border-radius:3px;
+    color: {{module.category_button.color}};
+    font-size:0.9rem;
+    outline: 0px!important;
+    transition:0.2s ease;
+    cursor:pointer;
+    font-size:12px;
+  }
+
+  @media (min-width: 768px){
+   .strip-tags button.tag-button {
+     font-size:17px;
+    }
+    .strip-tags button.tag-button:hover {
+      background-color: {{module.category_button.color}}!important;
+      color: #fff;
+    }
+  }
+ 
+  .tag-checked {
+    background-color: {{module.category_button.color}}!important;
+    color: #fff!important;
+    outline:0px!important;
+  }  
+  
+  {% endif %}
+
+  .stages-active {
+    color: {{module.primary_color.color}}!important;
+    background-color: #fff;
+  }
+  
+/*
+  .tag-container:after {
+  top: 100%;
+  left: 50%;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border: solid transparent;
+  border-color: rgba(213, 118, 34, 0);
+  border-top-color: #fff;
+  border-width: 14px;
+  margin-left: -14px;
+}
+*/
+
+  .button-collection-area--flex {
+    display:flex;
+    align-items:center;
+  }
+  @media (min-width:768px){
+    .button-collection-area--flex {
+      justify-content:center;
+    }
+  }
+
+  #daySelect .day-btn--inactive {
+    box-shadow:none;
+    font-family: Museo-sans,sans-serif;
+    font-weight: 700;
+  }
+
+  #daySelect .day-btn--inactive.active {
+    background-color:white;
+    color: #1f1e1e;
+
+  }
+
+  #daySelect .day-btn--inactive {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+  }
+
+  #daySelect .day-btn--inactive:hover:not(.active) {
+    background-color: rgba(0,0,0,0.5)!important;
+    color:white;
+  }
+
+  @media (max-width:768px){
+    #daySelect .day-btn--inactive {
+       border-radius: .25rem!important;
+    }
+  }
+
+  .card .badge {
+    font-size:12px;
+    margin-right:6px;
+    margin-top:6px;
+    margin-bottom:0px;
+    padding: 7px 5px;
+    background: transparent;
+    color: {{ module.primary_color.color }};
+    border:1px solid {{ module.primary_color.color }};
+    /* text-transform: uppercase; */
+    font-weight:normal;
+  }
+
+/*
+  .card.selected.active-card {
+    background-color:{{module.primary_second_gradient_color.color}};
+    color:white!important;
+  }
+  .card.selected.active-card h3 {
+    color:white!important;
+  }
+
+  .card.selected.active-card .badge {
+    color:white!important;
+    border-color:white!important;
+  }
+
+  .card.selected.active-card .badge.tag-highlighted {
+    color: {{ module.primary_color.color }}!important;
+    background-color:white!important;
+  }
+
+  .card.selected.active-card .arrow-button--arrow {
+    color:white!important;
+  }
+
+  .card.selected.active-card .card-flex--a {
+    border-right-color: white;
+  }
+*/
+  .card-badge-container {
+    display:flex;justify-content:flex-end;width: 100%;
+  }
+
+  .tag-highlighted {
+    background-color: {{ module.primary_color.color }}!important;
+    color: #fff!important;
+  }
+
+  .card--container {
+    display:flex;
+    flex-direction:row;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+  }
+
+  .card--container h3 {
+    /* font-family: wfont_2a027f_677da06ea5b245109156f0232cd8b7af,wf_677da06ea5b245109156f0232,orig_museosans_500,sans-serif; */
+    font-family: museo-sans, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .card--container .card-flex--outer-outer-1 {
+    width:calc(100%);
+    display:flex;
+    flex-direction:row;
+  }
+  @media(max-width:1200px){
+    .card--container .card-flex--outer-outer-1 {
+      width:calc(100% - 34px);
+    }
+  }
+
+  .card-container .card-flex--outer-outer-2 {
+    position: absolute;
+    top:0px;
+    right:0px;
+  }
+
+  .card--container .card-flex--outer-1 {
+    display:flex;
+    {% if module.hide_tags %}width: 100%;{% else %}width:75%;{% endif %}
+  }
+
+  .card--container .card-flex--outer-2 {
+    display:flex;
+    {% if module.hide_tags %}width: 10%;{% else %}width:25%;{% endif %}
+  }
+
+  .card--container .card-flex--a { 
+    width:160px;
+    border-right: 1px dotted #ccc;
+   }
+
+  .card--container .card-flex--b { 
+    width:calc(100% - 160px);
+   }
+
+  .card--container .card-flex--c { 
+    width: calc(100%);
+    display:flex;
+    align-items:flex-end;
+   }
+
+  .card--container .card-flex--d { 
+    width:34px;
+   }
+
+   @media (max-width:1200px) {
+
+    .card--container {
+      flex-direction:column;
+    }
+
+    .card--container .card-flex--outer-outer-1 {
+      flex-direction:column;
+    }
+
+    .card--container .card-flex--outer-1 {
+      width:100%;
+    }
+
+    .card--container .card-flex--outer-2 {
+      width:100%;
+    }
+
+    .card-badge-container {
+      justify-content:flex-start;
+    }
+
+   }
+
+   @media (max-width: 768px){
+    .card--container .card-flex--outer-1 {
+      flex-direction:column;
+    }
+    .card--container .card-flex--a { 
+      width:100%;
+      border-right:0;
+     }
+
+    .card--container .card-flex--b { 
+      width:calc(100%);
+     }
+   }
+
+   .arrow-button--border {
+    border-color: #ccc!important;
+   }
+
+   .arrow-button--arrow {
+    color: {{ module.primary_color.color }}!important;
+   }
+
+/*
+.mdx-header-full-row.header-background-container--inner .container {
+   max-width:1140px;
+}
+*/ 
+
+/* COLOURS */
+{% for colours in module.level_colours %}
+  .level-id-color-{{loop.index}} {
+    background-color: {{ colours.career_level_color.color }}!important;
+  }
+  .level-id-border-color-{{loop.index}} {
+   border-color: {{ colours.career_level_color.color }}!important;
+  }
+  .level-id-text-color-{{loop.index}} {
+    color: {{ colours.career_level_color.color }}!important;
+  }
+{% endfor %}
+  
+  /* DEFAULT COLOUR FALLBACK */
+  .level-id-color- {
+    background-color: {{ module.default_career_level_color.color }}!important;
+  }
+  .level-id-border-color- {
+   border-color: {{ module.default_career_level_color.color }}!important;
+  }
+  .level-id-text-color- {
+    color: {{ module.default_career_level_color.color }}!important;
+  }
+
+.level-box {
+  font-weight: 900;
+  font-size: 14px;
+  display: inline;
+  border-radius:3px;
+  font-family:museo-sans,sans-serif;
+  text-transform: uppercase;
+  /* padding:2px 4px; */
+
+}
+/*
+.card.selected.active-card .level-box {
+  color: white!important;
+  border-color:white!important;
+}
+.card.selected.active-card .card-border {
+  background-color:white!important;
+  width:5px!important;
+}
+*/
+
+</style>
+
+<span id="colorPrimary" style="color: {{ module.primary_color.color }}"></span>
+<span id="colorSecondary" style="color: {{ module.secondary_color.color }}"></span>
+<span id="colorDays" class="d-none" style="color: {{ module.days_color.color }}"></span>
+<span id="colorDaysActive" class="d-none" style="color: {{ module.days_color_active.color }}"></span>
+
+
+<!-- Preloader -->
+
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+
+{% set queryparams = "" %}
+{% set hubdb_id = module.hubdb_id %}
+{% set agendaTable = hubdb_table_rows(hubdb_id) %}
+{% set speaker_id = module.speakerdb_id %}
+{% set speakerTable = hubdb_table_rows(speaker_id) %}
+{% set leveldb_id = module.leveldb_id %}
+{% set levelTable = hubdb_table_rows(leveldb_id) %}
+{% set stagedb_id = module.stagedb_id %}
+{% set stageDB = hubdb_table_rows(stagedb_id) %}
+
+{% set test = hubdb_table_rows(leveldb_id) %}
+
+
+
+
+<div id="agenda-container-css">
+
+
+
+
+<!-- Temporary warning message -->
+{% if module.temporary_warning_message and module.warning_message_below_tag_title is not truthy %}
+  <div class="container-fluid" style="background-color:{{module.temporary_warning_message_background_color.color}}">
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3 style="color:#fff" class="my-4">
+            {{ module.temporary_warning_message_top_text }}
+          </h3>
+        </div>
+      </div>
+
+  </div>
+{% endif %}
+<!-- Temporary warning message -->
+
+<div style="background-color:{{module.overlay_colour.color}};position:relative;">
+  <div class="w-100 h-100" style="background-image:url('{{module.header_background_img.src}}');background-size:cover;background-position: center;position:absolute;opacity:{{module.overlay_opacity}}">
+  </div>
+<div class="w-100 mb-1">
+  <div class="container-fluid <!--mdx-header-full-row--> {% if !module.hide_tags %}header-background-container--inner{% endif %}">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 {% if module.hide_tags %}pt-4{% endif %} pb-2 text-center">
+          <h1 style="color:#fff">{{module.title}}</h1>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container py-4">
+      <div class="row text-center d-block d-md-none">
+        <p class="m-0" style="font-size:12px;color:#fff"><em>Tap to select a day</em></p> 
+      </div> 
+      <div class="row w-100 btn-group btn-group-toggle btn-group-justified" data-toggle="buttons" id="daySelect">
+        {% for day in module.days %}
+          <label class="col-12 {% if loop.length == 1 %}col-md-6 ml-md-auto mr-md-auto{% elif loop.length == 2 %}col-md-4 {% if loop.first %}ml-md-auto{% elif loop.last %}mr-md-auto{% endif %}{% elif loop.length == 3 %}col-md-4{% elif loop.length == 4 %}col-md-3{% else %}col-md-12{% endif %} btn day-btn--inactive px-5 text-center">
+          <input type="radio" name="dayOptions" id="day{{loop.index}}" autocomplete="off">
+          <span style="font-size:16px;text-transform:uppercase;" class="d-block">{{ day }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </div>
+
+{% if !module.hide_tags %}
+    <div class="container">
+      <div class="tag-container px-3 px-sm-4 px-md-5 {% if module.category_page %} pb-3 {% endif %} shadow-sm">
+      <div class="row strip-tags">
+        <div class="col-12 text-center">
+          <h2 class="color-grey-dark {% if !module.category_page %} py-2 {% else %} pt-3 {% endif %}" style="font-size:22px;font-family:Museo-sans;font-weight:700">{{module.stage_name_identifier}}</h2>
+        </div>
+
+    <!-- Temporary warning message -->
+      {% if module.temporary_warning_message and module.warning_message_below_tag_title is truthy %}
+        <div class="col-12 text-center">
+          <p class="mt-0" style="font-size:16px">
+            {{ module.temporary_warning_message_top_text }}
+          </p>
+        </div>
+      {% endif %}
+    <!-- Temporary warning message -->
+        
+      </div>
+      <div class="row pb-3 pt-2 strip-tags button-collection-area--flex" id="js-tagarea">
+        <span class="tag-button"></span>
+      </div>
+        
+    </div>
+    </div>
+{% endif %}
+
+   </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid agenda-new-module {% if module.hide_tags %} pt-0 {% else %} pt-4{% endif %}" style="background-color: {{module.bg_color.color}}; {% if module.borders.top %} border-top: 1px solid {{module.borders.color.color}}; {% endif %} {% if module.borders.bottom %} border-bottom: 1px solid {{module.borders.color.color}}; {% endif %}">
+
+  <div class="container py-3">
+    
+    <div class="row pt-0"> 
+
+      <!-- START W100  <div class="w-100"> -->
+
+
+
+
+
+        <div class="filter-container col-md-3 col-12 h-100 py-2 mb-3 {% if module.hide_stages %}d-none{% endif %}">
+          <h2 class="filter-title">
+            Themes
+          </h2>
+          <div class="inner">
+
+            {% for stage in stageDB %}
+                <div class="col-12 stage-select {% if loop.last %} last {% endif %}">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input stages-check" id="{{stage.stage_number}}">
+                    <label class="custom-control-label" for="{{stage.stage_number}}">{{stage.stage_name}}</label>
+                  </div>
+                </div>
+            {% endfor %}
+
+
+
+          </div>
+          <h2 class="filter-title">
+            Search
+          </h2>
+          <div class="inner">
+
+            <div class="row">
+              <div class="col-12 p-0 order-last order-md-first"> 
+                <form class="form-inline mt-2 mb-3 mb-md-2 mt-md-0" onkeypress="return event.keyCode != 13;"> 
+                  <div class="input-group w-100"> 
+                    <input id="search" class="form-control border-primary" type="search" placeholder="Search schedule..." aria-label="Search" style="width:80%!important">
+                    <span class="d-inline d-md-none input-group-append"> 
+                    <button class="btn btn-outline h-100 border-primary" type="button" style="border-left:0">
+                      <i style="color:{{ module.days_color_active.color }};" class="fa fa-search"></i> 
+                    </button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+
+        <div class="card-container {% if !module.hide_stages %}col-md-9{% endif %} col-12 pr-0 pr-md-0 pl-md-3 pl-0">
+
+
+        <!-- START CARD -->
+
+            <!-- Speaker match with database macro/function -->
+                  {% macro does_speaker_match_db(speakerName,linkToSpeaker,isAModerator) %}
+
+                    {% for speaker in speakerTable %}
+                      {% if speaker.speaker_name == speakerName %}
+                        {{ speaker_list(speaker.speaker_name,linkToSpeaker,speaker.title,speaker.company,speaker.headshot,isAModerator) }}
+                        {% set loopEnd = 1 %}
+                      {% endif %}
+                      {% if loop.last %}
+                        {% if loopEnd != 1 %}
+                          {{ speaker_list_noprof(speakerName,isAModerator) }}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+
+                  {% endmacro %}
+
+            <!-- session level match with level db -->
+                  {% macro does_session_level_match_db(levelId) %}
+
+                    {% for level in levelTable %}
+                      {% if levelId == level.id %}
+                        <p class="label-title">
+                          SUITABLE FOR:
+                        </p>
+                        <div class="level-id-border-color-{{level.id}} level-id-text-color-{{level.id}} level-box">{{ level.name }}</div>
+                        {% if loop.first is not truthy and loop.last is not truthy %}
+                        <p class="mb-1 mt-1 level-id-text-color-{{level.id}}" style="font-size:12px!important;font-family:Arial,sans-serif;">
+                          and above
+                        </p>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+
+                  {% endmacro %}
+
+
+            <!-- speaker list with images -->
+
+                  {% macro speaker_list(speakerName,speakerLink,speakerTitle,speakerCompany,speakerHeadshot,isAModerator) %}
+                  
+                    <!-- speaker start -->
+                      <div class="col-12 pl-0 mb-3 speaker-deets">
+                        {% if speakerLink == true %}
+                          <a class="speaker-link-a" target="_blank" href="./speakers#{{speakerName|replace(' ', '') }}"> 
+                          {% endif %}
+                            <div class="row align-items-center">
+                              <div class="col-3 col-sm-2 col-md-2 col-lg-2 px-0">
+                                <div class="level-id-border-color-{{session.level}}" style="max-width:90px;border:2px solid;border-radius:100%">
+                                  <img class="px-0 d-block mx-auto" style="" src="{% if speakerHeadshot %}{{ speakerHeadshot.url }}{% else %}https://cdn2.hubspot.net/hubfs/3873528/CORE-Maddox/images/PersonPlaceholder.png{% endif %}">
+                                </div>
+                              </div> 
+                              <div class="col-9 col-md-8 col-lg-9 pl-2 px-md-2 ml-md-2 ml-lg-0">
+                                {% if isAModerator %}<p class="mb-0" style="font-size:10px;color:#666">MODERATOR</p>{% endif %} 
+                                <p class="speaker-title level-id-text-color-{{session.level}} my-0" style="font-size:15px;" title="View speaker profile">{{ speakerName }}</p>
+                                <p class="my-0" style="font-size:14px;">{{ speakerTitle }} {% if speakerCompany %}@ {{ speakerCompany }}{% endif %}</p>
+                              </div>
+                            </div>
+                          {% if speakerLink == true %}
+                          </a>
+                        {% endif %}
+                      </div>
+
+                  {% endmacro %}
+
+
+
+            <!-- speaker list without images -->
+
+                  {% macro speaker_list_noprof(speakerName) %}
+                  
+                    <!-- speaker start -->
+                      <div class="col-12 pl-0 mb-3 speaker-deets">
+                            <div class="row align-items-center">
+                              <div class="col-3 col-sm-2 col-md-2 col-lg-2 px-0">
+                                <div class="level-id-border-color-{{session.level}}" style="max-width:90px;border:2px solid;border-radius:100%">
+                                <img class="px-0 d-block mx-auto" style="border-radius:100%;" src="https://cdn2.hubspot.net/hubfs/3873528/CORE-Maddox/images/PersonPlaceholder.png">
+                            </div>
+                              </div> 
+                              <div class="col-9 col-md-8 col-lg-9 pl-2 px-md-2 ml-md-2 ml-lg-0"> 
+                                <p class="speaker-title level-id-text-color-{{session.level}} my-0" style="font-size:15px;" title="View speaker profile">{{ speakerName }}</p>
+                                
+                              </div>
+                            </div>
+                      </div>
+
+                  {% endmacro %}
+
+
+        <!-- card NO RESULTS -->
+        <div class="col-12 mb-3" id="noResults" style="display:none;">
+          
+          <div class="row">
+            <div class="col-3 pl-4">
+            </div>
+
+            <div class="col-12">
+              <!--<h3 style="font-size:26px;">&nbsp;</h3>-->
+              <p class="description-short mt-4 text-center"><em>No results.</em></p>
+
+              </div>
+    
+            </div>
+
+          </div>
+        <!--end card -->
+
+
+
+
+
+
+        {% for session in agendaTable %}
+        {% if !session.hide %}
+        <div class="card mb-0 {% if not session.long_description %}no-expand{% else %} card-with-info{% endif %}" id="Card{{loop.index}}" data-time="{% if session.start_time_hour < 10 %}0{{ session.start_time_hour }}{% else %}{{ session.start_time_hour }}{% endif %}{% if session.start_time_minute < 10 %}0{{ session.start_time_minute }}{% else %}{{ session.start_time_minute }}{% endif %}" data-id="Card{{loop.index}}" data-title="{{session.title|escape}}" data-stage="{{session.stage}}" data-level="{{session.level}}" data-day="{{'day' + session.day}}" data-long-description="{{session.long_description|escape}}" data-short-description="{{session.short_description|escape}}" data-room="{{session.room}}" data-tags="{% if !module.category_page%}{% if session.tag1 %}{{ session.tag1 }}{% endif %}{% if session.tag2 %},{{ session.tag2 }}{% endif %}{% if session.tag3 %},{{ session.tag3 }}{% endif %}{% if session.tag4 %},{{ session.tag4 }}{% endif %}{% if session.tag5 %},{{ session.tag5 }}{% endif %}{% if session.tag6 %},{{ session.tag6 }}{% endif %}{% else %}{% if session.cat1 %}{{ session.cat1 }}{% endif %}{% if session.cat2 %},{{ session.cat2 }}{% endif %}{% if session.cat3 %},{{ session.cat3 }}{% endif %}{% if session.cat4 %},{{ session.cat4 }}{% endif %}{% if session.cat5 %},{{ session.cat5 }}{% endif %}{% if session.cat6 %},{{ session.cat6 }}{% endif %}{% endif %}" data-speakers="{% if session.speaker_name1%}{{session.speaker_name1}}{%endif%}{% if session.speaker_name2%}{{session.speaker_name2}}{%endif%}{% if session.speaker_name3%}{{session.speaker_name3}}{%endif%}{% if session.speaker_name4%}{{session.speaker_name4}}{%endif%}">
+          <div class="card-border h-100 level-id-color-{{session.level}}"></div>
+          
+          <div class="card--container shadow-sm">
+
+            <div class="card-flex--outer-outer-1">
+
+
+            <div class="card-flex--outer-1">
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+        <!-- MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+            <div class="card-flex--a px-3 pb-4 d-none d-md-block">
+              <!--<h3 class="mb-0">DAY 1 <span class="d-none d-md-inline"><br></span><span class="d-inline d-md-none">-</span> 18:30</h3>-->
+              <div style="height:50px;display:flex;align-items:flex-end;"> 
+               <h3 class="level-id-border-color-{{session.level}}" style="color:#1f1e1e;margin-top: 0px;margin-bottom: 0px;border-bottom: 3px solid;padding-bottom: 2px;">
+                <!-- day match loop -->
+                 <span style="font-size: 15px">
+                  {% for day in module.days %}
+                    {% if loop.index == session.day %}
+                      {{ day }}
+                    {% endif %}
+                  {% endfor %}
+                 </span>
+               </h3>
+             </div>
+                <!-- end day match loop -->
+                <h3 style="color:#1f1e1e;margin-top: 2px;font-size: 22px;">{% if session.start_time_hour < 10 %}0{{ session.start_time_hour }}{% else %}{{ session.start_time_hour }}{% endif %}:{% if session.start_time_minute < 10 %}0{{ session.start_time_minute }}{% else %}{{ session.start_time_minute }}{% endif %}
+
+                {% if session.end_time_hour %} - 
+                <span style="display:block">{% if session.end_time_hour < 10 %}0{{ session.end_time_hour }}{% else %}{{ session.end_time_hour }}{% endif %}:{% if session.end_time_minute < 10 %}0{{ session.end_time_minute }}{% else %}{{ session.end_time_minute }}{% endif %}</span>
+
+                {% endif %}
+
+                </h3> 
+              
+              <!--<p class="mb-1 mt-2" style="font-size:14px!important;color:#aaa;">-->
+                {{ does_session_level_match_db(session.level) }}
+              <!--</p>-->
+
+              <!-- SHOW STAGE -->
+
+              {% if module.session_show_stages is truthy and session.stage %}
+              <p class="label-title">
+                {% if module.agenda_theme_name %}{{module.agenda_theme_name}}{% else %}THEME:{% endif %}
+              </p>
+              <p style="font-size:12px!important;margin-bottom:0px;"> 
+               {% for stage in stageDB %}
+                {% if session.stage == stage.stage_number %}
+                  {{ stage.stage_name }}
+                {% endif %}
+               {% endfor %}
+              </p>
+              {% endif %}
+
+              <!-- SHOW ROOM -->
+
+              {% if module.session_show_room is truthy and session.room %}
+              <p class="label-title">
+                ROOM:
+              </p>
+              <p style="font-size:12px!important;margin-bottom:0px;text-transform:uppercase;"> 
+                
+                  {{ session.room }}
+                
+              </p>
+              {% endif %}
+            </div>
+            <div class="card-flex--b px-3 d-none d-md-block">
+              <div class="level-id-border-color-{{session.level}} session-title-spacing-above"></div>
+              <h3 style="font-size: 18px;color:#1f1e1e;margin-top: 5px;" class="mb-4">{{ session.title }}</h3> 
+               <!-- start speaker if loop -->
+                <div class="row my-2"> 
+
+                  {% if session.speaker_name1 %}
+                    {{ does_speaker_match_db(session.speaker_name1,session.link_to_speaker_page1,session.mod1) }}
+                  {% endif %}
+
+                  {% if session.speaker_name2 %}
+                    {{ does_speaker_match_db(session.speaker_name2,session.link_to_speaker_page2,session.mod2) }}
+                  {% endif %}
+
+                  {% if session.speaker_name3 %}
+                    {{ does_speaker_match_db(session.speaker_name3,session.link_to_speaker_page3,session.mod3) }}
+                  {% endif %}
+
+                  {% if session.speaker_name4 %}
+                    {{ does_speaker_match_db(session.speaker_name4,session.link_to_speaker_page4,session.mod4) }}
+                  {% endif %}
+
+                  {% if session.speaker_name5 %}
+                    {{ does_speaker_match_db(session.speaker_name5,session.link_to_speaker_page5,session.mod5) }}
+                  {% endif %}
+
+                  {% if session.speaker_name6 %}
+                    {{ does_speaker_match_db(session.speaker_name6,session.link_to_speaker_page6,session.mod6) }}
+                  {% endif %}
+
+
+                </div>
+                <!-- end speaker if loop -->
+
+              {% if session.long_description %}<div class="description-long-intro mt-2 mb-2">{{ session.long_description|truncate(100) }}</div>{% endif %} 
+              {% if session.short_description %}<p class="description-short mt-1 mt-md-2">{{ session.short_description }}</p>{% endif %} 
+              <div class="description-long">
+                <div class="mt-0" style="overflow:hidden">{{ session.long_description }}</div> <!--mt-2-->
+                <!-- tags -->
+              </div>
+
+            <div class="card-flex--c py-0 d-xl-none d-flex">
+             {# {% if session.short_description %}<h3 style="font-size:26px;">&nbsp;</h3> {% endif %} #}
+              <div class="row {% if module.hide_tags %} d-none {% endif %} card-badge-container py-2 p-xl-0">
+                 {# {% for tag in session.tags %} #}
+                    {% if session.tag1 %}<p class="badge tag-id-{{session.tag1|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag1 }}</p>{% endif %}
+                    {% if session.tag2 %}<p class="badge tag-id-{{session.tag2|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag2 }}</p>{% endif %}
+                    {% if session.tag3 %}<p class="badge tag-id-{{session.tag3|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag3 }}</p>{% endif %}
+                    {% if session.tag4 %}<p class="badge tag-id-{{session.tag4|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag4 }}</p>{% endif %}
+                    {% if session.tag5 %}<p class="badge tag-id-{{session.tag5|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag5 }}</p>{% endif %}
+                    {% if session.tag6 %}<p class="badge tag-id-{{session.tag6|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag6 }}</p>{% endif %}
+                  {# {% endfor %} #}
+                </div>
+            </div>              
+    
+            </div>
+
+
+
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+          <!-- END: MEDIUM SCREEN AND ABOVE - NORMAL DESKTOP LAYOUT BLOCKS -->
+
+
+
+
+
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+          <!-- START: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+
+
+
+            <div class="card-flex--a px-3 pb-2 d-block d-md-none">
+              <!--<h3 class="mb-0">DAY 1 <span class="d-none d-md-inline"><br></span><span class="d-inline d-md-none">-</span> 18:30</h3>-->
+              <div style="height:50px;display:flex;align-items:flex-end;"> 
+               <h3 class="level-id-border-color-{{session.level}}" style="color:#1f1e1e;margin-top: 0px;margin-bottom: 0px;border-bottom: 3px solid;padding-bottom: 2px;">
+                <!-- day match loop -->
+                 <span style="font-size: 15px">
+                  {% for day in module.days %}
+                    {% if loop.index == session.day %}
+                      {{ day }}
+                    {% endif %}
+                  {% endfor %}
+                 </span>
+               </h3>
+             </div>
+                <!-- end day match loop -->
+                <h3 style="color:#1f1e1e;margin-top: 2px;font-size: 22px;">{% if session.start_time_hour < 10 %}0{{ session.start_time_hour }}{% else %}{{ session.start_time_hour }}{% endif %}:{% if session.start_time_minute < 10 %}0{{ session.start_time_minute }}{% else %}{{ session.start_time_minute }}{% endif %}
+
+                {% if session.end_time_hour %} - {% if session.end_time_hour < 10 %}0{{ session.end_time_hour }}{% else %}{{ session.end_time_hour }}{% endif %}:{% if session.end_time_minute < 10 %}0{{ session.end_time_minute }}{% else %}{{ session.end_time_minute }}{% endif %}
+
+                {% endif %}
+
+
+                </h3> 
+
+ <div class="level-id-border-color-{{session.level}} session-title-spacing-above"></div>
+              <h3 style="font-size: 18px;color:#1f1e1e;margin-top: 5px;" class="mb-4">{{ session.title }}</h3> 
+              
+              <!--<p class="mb-1 mt-2" style="font-size:14px!important;color:#aaa;">-->
+                {{ does_session_level_match_db(session.level) }}
+              <!--</p>-->
+
+              <!-- SHOW STAGE -->
+
+              {% if module.session_show_stages is truthy and session.stage %}
+              <p class="label-title">
+                THEME:
+              </p>
+              <p style="font-size:12px!important;margin-bottom:0px;max-width:150px"> 
+               {% for stage in stageDB %}
+                {% if session.stage == stage.stage_number %}
+                  {{ stage.stage_name }}
+                {% endif %}
+               {% endfor %}
+              </p>
+              {% endif %}
+
+              <!-- SHOW ROOM -->
+
+              {% if module.session_show_room is truthy and session.room %}
+              <p class="label-title">
+                ROOM:
+              </p>
+              <p style="font-size:12px!important;margin-bottom:0px;text-transform:uppercase;"> 
+                
+                  {{ session.room }}
+                
+              </p>
+              {% endif %}
+            </div>
+            <div class="card-flex--b px-3 d-block d-md-none">
+             
+               <!-- start speaker if loop -->
+                <div class="row my-2"> 
+
+
+                  {% if session.speaker_name1 %}
+                    {{ does_speaker_match_db(session.speaker_name1,session.link_to_speaker_page1,session.mod1) }}
+                  {% endif %}
+
+                  {% if session.speaker_name2 %}
+                    {{ does_speaker_match_db(session.speaker_name2,session.link_to_speaker_page2,session.mod2) }}
+                  {% endif %}
+
+                  {% if session.speaker_name3 %}
+                    {{ does_speaker_match_db(session.speaker_name3,session.link_to_speaker_page3,session.mod3) }}
+                  {% endif %}
+
+                  {% if session.speaker_name4 %}
+                    {{ does_speaker_match_db(session.speaker_name4,session.link_to_speaker_page4,session.mod4) }}
+                  {% endif %}
+
+                  {% if session.speaker_name5 %}
+                    {{ does_speaker_match_db(session.speaker_name5,session.link_to_speaker_page5,session.mod5) }}
+                  {% endif %}
+
+                  {% if session.speaker_name6 %}
+                    {{ does_speaker_match_db(session.speaker_name6,session.link_to_speaker_page6,session.mod6) }}
+                  {% endif %}
+
+
+                </div>
+                <!-- end speaker if loop -->
+
+              {% if session.long_description %}<div class="description-long-intro mt-2 mb-2">{{ session.long_description|truncate(100) }}</div>{% endif %} 
+              {% if session.short_description %}<p class="description-short mt-1 mt-md-2">{{ session.short_description }}</p>{% endif %} 
+              <div class="description-long">
+                <div class="mt-0" style="overflow:hidden">{{ session.long_description }}</div> <!--mt-2-->
+                <!-- tags -->
+              </div>
+
+            <div class="card-flex--c py-0 d-md-none d-flex">
+             {# {% if session.short_description %}<h3 style="font-size:26px;">&nbsp;</h3> {% endif %} #}
+              <div class="row {% if module.hide_tags %} d-none {% endif %} card-badge-container py-2 p-xl-0">
+                 {# {% for tag in session.tags %} #}
+                    {% if session.tag1 %}<p class="badge tag-id-{{session.tag1|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag1 }}</p>{% endif %}
+                    {% if session.tag2 %}<p class="badge tag-id-{{session.tag2|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag2 }}</p>{% endif %}
+                    {% if session.tag3 %}<p class="badge tag-id-{{session.tag3|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag3 }}</p>{% endif %}
+                    {% if session.tag4 %}<p class="badge tag-id-{{session.tag4|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag4 }}</p>{% endif %}
+                    {% if session.tag5 %}<p class="badge tag-id-{{session.tag5|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag5 }}</p>{% endif %}
+                    {% if session.tag6 %}<p class="badge tag-id-{{session.tag6|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag6 }}</p>{% endif %}
+                  {# {% endfor %} #}
+                </div>
+            </div>              
+    
+            </div>
+
+
+
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+<!-- END: SMALL SCREEN AND BELOW - MOBILE LAYOUT BLOCKS -->
+
+          </div>
+
+          <div class="card-flex--outer-2 d-xl-flex d-none">
+
+            <div class="card-flex--c pt-xl-3 pb-xl-2 py-0">
+             {# {% if session.short_description %}<h3 style="font-size:26px;">&nbsp;</h3> {% endif %} #}
+              <div class="row {% if module.hide_tags %} d-none {% endif %} card-badge-container p-2 p-xl-0">
+                 {# {% for tag in session.tags %} #}
+                    {% if session.tag1 %}<p class="badge tag-id-{{session.tag1|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag1 }}</p>{% endif %}
+                    {% if session.tag2 %}<p class="badge tag-id-{{session.tag2|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag2 }}</p>{% endif %}
+                    {% if session.tag3 %}<p class="badge tag-id-{{session.tag3|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag3 }}</p>{% endif %}
+                    {% if session.tag4 %}<p class="badge tag-id-{{session.tag4|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag4 }}</p>{% endif %}
+                    {% if session.tag5 %}<p class="badge tag-id-{{session.tag5|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag5 }}</p>{% endif %}
+                    {% if session.tag6 %}<p class="badge tag-id-{{session.tag6|cut(' ')|cut('/')|cut('&')|cut('-')|lower}}">{{ session.tag6 }}</p>{% endif %}
+                  {# {% endfor %} #}
+                </div>
+            </div>
+
+          </div><!-- end card-flex-outer-2 -->
+
+        </div><!-- end outerouter 1-->
+        <div class="card-flex--outer-outer-2">
+
+            <div class="card-flex--d">
+              {% if session.long_description %}<a class="arrow-button--border arrow-button--arrow show-more" href="javascript:void(0);" style=""><i  style="width:16px; margin: 3px 4px; display:block;" role="presentation" aria-label="More" class="fa fa-chevron-right">&nbsp;</i></a>{% endif %}
+            </div>
+
+          </div>
+
+          </div>
+
+
+          </div>
+         
+
+        <!-- END CARD -->
+        {% endif %} 
+        {% endfor %}  
+        </div><!-- end card-container div -->   
+      <!-- end W100 </div> -->
+    </div>
+  </div>
+</div>
+
+
+</div>

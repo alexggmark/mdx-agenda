@@ -6,34 +6,25 @@ var tagCollect = [];
 var activeTags = [];
 
 function matchCardTagsWithActiveTags(){
-  // sloppy hide cards by day
   $('.card:visible').each(function(){
     var thisCardTagsPre = $(this).attr('data-tags').split(',');
-    //var thisCardTags = thisCardTagsPre.map(x => x.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''));
     var thisCardTags = thisCardTagsPre.map(function (x) {
       return x.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
     });
-    //console.log(thisCardTags);
-    //console.log("THE ACTIVE TAGS: " + activeTags);
-    //console.log("THIS CARD TAGS: " + thisCardTags);
     if(arraysAreEqual(activeTags,thisCardTags) || activeTags.length === 0){
       $(this).show();
     } else {
       $(this).hide();
     }
-    //console.log(thisCardTags);
-
   });
 
   $('.js-cat-descrip').each(function(){
-    
     let thisCatId = $(this).attr('id');
     if(arraysAreEqual(activeTags,thisCatId)){
       $(this).slideDown();
     } else {
       $(this).slideUp();
-    }
-    
+    }    
   });
 
   if($('.card:visible').length === 0){
@@ -86,17 +77,14 @@ $(document).ready(function() {
           'speakers': $(this).attr('data-speakers')
         });
 
-/***** CUSTOM ****/
       // split tags and add to main tag store
       var splitArr = $(this).attr('data-tags').split(',');
       if($(this).attr('data-tags')) {
          tagCollect.push(splitArr);
       }
-/***** CUSTOM ****/
 
     });
 
-/***** CUSTOM ****/
     // turn tags into buttons on front
     (function(){
 
@@ -208,7 +196,6 @@ $(document).ready(function() {
       
 
     })();
-/***** CUSTOM ****/
     
     //set up FuseJS for search
     masterOptions = { 
@@ -262,28 +249,6 @@ matchCardTagsWithActiveTags();
 
 });
 
-/*
-function arraysAreEqual(arr1,arr2) {
-  var everythingMatches = 0;
-  //console.log("ARRAY 1: " + arr1);
-  //console.log("ARRAY 2: " + arr2);
-  for(let i=0;i<arr1.length;i++){
-    if(arr2.includes(arr1[i])){
-      //console.log(arr2 + " MATCHES " + arr1);
-    } else {
-      //console.log(arr2 + " DOES NOT MATCHE " + arr1);
-      everythingMatches++;
-    }
-  }
-  if(everythingMatches>0){
-    return false;
-  } else {
-    return true;
-  }
-
-}
-*/
-
 var arraysAreEqual = function(arr1,arr2) {
   for(let i=0;i<arr1.length;i++){
     if(arr2.includes(arr1[i])){
@@ -292,26 +257,14 @@ var arraysAreEqual = function(arr1,arr2) {
   }
 }
 
-/***** CUSTOM ***/
-
-/***** CUSTOM ***/
-
-
 function processSearchResults(result) {
-  //  console.log("****SEARCH RESULT****");
- //   console.log(result); 
     $('.card').css('display','none');
-    //$('.card').fadeOut('100'); 
     if(result.length == 0) {
-      //$('#noResults').css('display','block');
       $('#noResults').show();
     } else {
       $('#noResults').css('display','none');
-      
       result.forEach(function(element) {
-      //$('#'+element.key).css('display','block');
         $('#'+element.key).show();
-    //  console.log(element);
     });
     } 
   matchCardTagsWithActiveTags();
@@ -320,7 +273,6 @@ function processSearchResults(result) {
 
 $('.card').hover(function() {
   $(this).find('.card-border').addClass('card-selected');
-  
 }, function() {
   $(this).find('.card-border').removeClass('card-selected');
 });
@@ -329,16 +281,12 @@ $('.card').hover(function() {
 
 $('.card').click(function() { 
   var t = $(this);
-  
   if(t.hasClass('no-expand')) {
     //do nothing
-  }
-  else {
-  
+  } else {
     if(t.hasClass('active-card')) {
       t.find('.description-long-intro').show();
       t.find('.show-more').removeClass('rotated');
-      //t.find('.description-long').css('display','none'); 
       t.find('.description-long').hide(); 
       t.removeClass('active-card');
       t.removeClass('selected');
@@ -347,7 +295,6 @@ $('.card').click(function() {
       clearCards();
       t.find('.description-long-intro').hide();
       t.find('.show-more').addClass('rotated');
-      //t.find('.description-long').css('display','block'); 
       t.find('.description-long').show();   
       t.addClass('selected');
       t.addClass('active-card');
@@ -367,7 +314,6 @@ function clearCards() {
 }
 
 function showCards() {
-  //$('.card').css('display','block');
   $('.card').show();
   $('#noResults').css('display','none');
   matchCardTagsWithActiveTags();
@@ -385,8 +331,7 @@ function clearSearch() {
     $(this).prop('checked',false); 
   });
   
-  //clear day filter
-  $('#daySelect').find('.active').removeClass('active');
+$('#daySelect').find('.active').removeClass('active');
   daySearch = '';
   showCards();
   matchCardTagsWithActiveTags();
@@ -417,15 +362,14 @@ $('.stages-check').click(function() {
 
  
  
-$('#daySelect input[type=radio]').on('change', function() { //was on 'change'
-  //console.log($(this));
+$('#daySelect input[type=radio]').on('change', function() {
   if($(this).parent().hasClass('active')) { //this doesn't actually do anything right now, because 'change' doesn't fire without an actual value change
     //console.log("Removing active day..."); 
      $(this).parent().removeClass('active');
      doSearch();
      matchCardTagsWithActiveTags();
     } else {
-      console.log(this.id);
+      console.log('Manual day select: ' + this.id);
       daySearch = this.id;
       doSearch(this.id);
       matchCardTagsWithActiveTags();
@@ -440,114 +384,88 @@ function doSearch(day) {
     day = daySearch;
   }
   
- // console.log("******************DAY VARIABLE ************************");
- // console.log(day);
-  
-   var stageOptions = {
-      keys: ['stage'],
-      includeScore: true,
-      threshold:0.0,
-      location:0,
-      distance: 0
+var stageOptions = {
+    keys: ['stage'],
+    includeScore: true,
+    threshold:0.0,
+    location:0,
+    distance: 0
+}
+   
+var dayOptions = {
+    keys: ['day'],
+    threshold:0.0
+}
+
+var tagOptions = {
+keys: ['tags'],
+threshold: 0.0
+}
+
+var result = [];
+
+
+//if day is filtered
+if(day) {
+    var fuseDay = new Fuse(sessionDetails, dayOptions);
+    var dayResult = fuseDay.search(day);
+    result = dayResult;
+
+    daySearch = day;  
+}
+
+//if stage is filtered
+var $boxes = $('.stages-active');
+
+
+if($boxes.length > 0) {
+var stageTemp = [];
+    $boxes.each(function() {
+        if(day) {
+            fuseStage = new Fuse(result, stageOptions); 
+            console.log("Searching for... " + $(this).attr('id')); 
+            var temp = fuseStage.search($(this).attr('id'));
+        /* establish what stage 'id' is for cards without stages */ 
+        var tempNoStage = fuseStage.search('0');
+            temp2 = [];
+            temp.forEach(function (record) {
+                if (record.score == 0) {
+                temp2.push(record.item);
+                }
+            });
+        /* add the non-stages to the listing function */
+       tempNoStage.forEach(function (record) {
+                if (record.score == 0) {
+                temp2.push(record.item);
+                }
+            });
+        console.log(temp2);
+        stageTemp = stageTemp.concat(temp2); 
+        } else {
+        fuseStage = new Fuse(sessionDetails, stageOptions); 
+            var temp = fuseStage.search($(this).attr('id'));
+            temp2 = [];
+            temp.forEach(function (record) {
+                if (record.score == 0) {
+                temp2.push(record.item);
+                }
+            })
+        stageTemp = stageTemp.concat(temp2); 
+        }
+    }); 
+    result = stageTemp;
+    } 
+    if($('#search').val().length > 0) {
+    if(result.length < 1) {
+        result = sessionDetails;
     }
-   
-   var dayOptions = {
-     keys: ['day'],
-     threshold:0.0
-   }
+    var fuseSearch = new Fuse(result, masterOptions);
+    result = fuseSearch.search($('#search').val());
 
-/***** CUSTOM ***/
-  var tagOptions = {
-    keys: ['tags'],
-    threshold: 0.0
-  }
-/***** CUSTOM **/
-      
-      var result = [];
-  
-   
-      //if day is filtered
-      if(day) {
-        //console.log(sessionDetails);
-        //console.log("day is: " + day);
-        var fuseDay = new Fuse(sessionDetails, dayOptions);
-        var dayResult = fuseDay.search(day);
-        //console.log("***DAY RESULT***"); 
-        //console.log(day);
-        //console.log(dayResult);
-        result = dayResult;
-        
-        //store the daysearch in global var
-        daySearch = day;  
-      }
-  
-      //if stage is filtered
-      var $boxes = $('.stages-active');
+    }
 
-  
-      if($boxes.length > 0) {
-          //console.log("****BOXES****");
-          //console.log($boxes);
-        var stageTemp = [];
-            $boxes.each(function() {
-              
-              if(day) {
-                 fuseStage = new Fuse(result, stageOptions); 
-                 console.log("Searching for... " + $(this).attr('id')); 
-                 var temp = fuseStage.search($(this).attr('id'));
-                /* establish what stage 'id' is for cards without stages */ 
-                var tempNoStage = fuseStage.search('0');
-                  temp2 = [];
-                  temp.forEach(function (record) {
-                      if (record.score == 0) {
-                        temp2.push(record.item);
-                      }
-                    });
-                /* add the non-stages to the listing function */
-                /*  tempNoStage.forEach(function (record) {
-                      if (record.score == 0) {
-                        temp2.push(record.item);
-                      }
-                    }); */
-                console.log(temp2);
-                //result = result.concat(temp);
-                //result = temp;
-                stageTemp = stageTemp.concat(temp2); 
-                
-              } else {
-                fuseStage = new Fuse(sessionDetails, stageOptions); 
-                 var temp = fuseStage.search($(this).attr('id'));
-                 temp2 = [];
-                  temp.forEach(function (record) {
-                      if (record.score == 0) {
-                        temp2.push(record.item);
-                      }
-                    })
-                stageTemp = stageTemp.concat(temp2); 
-                
-              }
-
-            }); 
-        
-          result = stageTemp;
-         // console.log("***RESULT STAGE SEARCH***");
-         // console.log(result);
-           } 
-          
-          if($('#search').val().length > 0) {
-            if(result.length < 1) {
-              result = sessionDetails;
-            }
-            var fuseSearch = new Fuse(result, masterOptions);
-            result = fuseSearch.search($('#search').val());
-
-
-          //  console.log("***RESULT TEXT SEARCH***"); 
-          //  console.log(result);
-          }
-
-         processSearchResults(result);
-         matchCardTagsWithActiveTags();
+    processSearchResults(result);
+    matchCardTagsWithActiveTags();
           
 
 }
@@ -563,70 +481,42 @@ var delay = (function(){
 // URL query string parameter puller 
 
 function getAllUrlParams(url) {
-
-  // get query string from url (optional) or window
   var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-
-  // we'll store the parameters here
   var obj = {};
-
-  // if query string exists
   if (queryString) {
-
-    // stuff after # is not part of query string, so get rid of it
     queryString = queryString.split('#')[0];
-
-    // split our query string into its component parts
     var arr = queryString.split('&');
 
     for (var i = 0; i < arr.length; i++) {
-      // separate the keys and the values
       var a = arr[i].split('=');
-
-      // set parameter name and value (use 'true' if empty)
       var paramName = a[0];
       var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
 
-      // (optional) keep case consistent
       paramName = paramName.toLowerCase();
       if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-
-      // if the paramName ends with square brackets, e.g. colors[] or colors[2]
       if (paramName.match(/\[(\d+)?\]$/)) {
-
-        // create key if it doesn't exist
         var key = paramName.replace(/\[(\d+)?\]/, '');
         if (!obj[key]) obj[key] = [];
-
-        // if it's an indexed array e.g. colors[2]
         if (paramName.match(/\[\d+\]$/)) {
-          // get the index value and add the entry at the appropriate position
           var index = /\[(\d+)\]/.exec(paramName)[1];
           obj[key][index] = paramValue;
         } else {
-          // otherwise add the value to the end of the array
           obj[key].push(paramValue);
         }
       } else {
-        // we're dealing with a string
         if (!obj[paramName]) {
-          // if it doesn't exist, create property
           obj[paramName] = paramValue;
         } else if (obj[paramName] && typeof obj[paramName] === 'string'){
-          // if property does exist and it's a string, convert it to an array
           obj[paramName] = [obj[paramName]];
           obj[paramName].push(paramValue);
         } else {
-          // otherwise add the property
           obj[paramName].push(paramValue);
         }
       }
     }
   }
-
   return obj;
 }
-
 var urlParameterArray = [];
 if(getAllUrlParams().tag1){
   urlParameterArray.push(getAllUrlParams().tag1);
@@ -652,6 +542,15 @@ if(getAllUrlParams().tag7){
 if(getAllUrlParams().tag8){
   urlParameterArray.push(getAllUrlParams().tag8);
 };
+/*
+if(getAllUrlParams().searchtitle && getAllUrlParams().searchday){
+  console.log('this is working!!');
+  var title = getAllUrlParams().searchtitle;
+  var urlDay = 'day' + getAllUrlParams().searchday;
+  console.log(urlDay);
+  doSearch(urlDay);
+};
+*/
 // Order sessions by time and highlight sessions wth '0' as stage
 $(document).ready(function(){
   $('.card-container .card').sort(function(a,b){
@@ -659,12 +558,22 @@ $(document).ready(function(){
   }).appendTo('.card-container');
   /* HIGHLIGHT CARDS WITHOUT TRACKS */
   $('[data-stage="0"]').addClass('highlighted--crosstrack');
-  //$('[data-stage="0"] .card-border').addClass('highlighted--crosstrack-border');
-  //matchCardTagsWithActiveTags();
-});
 
-/*
-$('.hs_cos_wrapper').on('change',{
-  matchCardTagsWithActiveTags();
+  if(getAllUrlParams().searchtitle && getAllUrlParams().searchday){
+    var urlTitle = 'Card' + getAllUrlParams().searchtitle;
+    var urlDay = 'day' + getAllUrlParams().searchday;
+    console.log('URL day select: ' + urlDay);
+    daySearch = urlDay;
+    doSearch(daySearch);
+    $('#daySelect').find('.active').removeClass('active');
+    $('#' + urlDay).parent().addClass('active');
+    $('#' + urlTitle).addClass('selected active-card');
+    $('#' + urlTitle).find('.description-long-intro').hide();
+    $('#' + urlTitle).find('.show-more').addClass('rotated');
+    $('#' + urlTitle).find('.description-long').show(); 
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $('#' + urlTitle).offset().top - 85
+    }, 0);
+  };
+
 });
-*/
